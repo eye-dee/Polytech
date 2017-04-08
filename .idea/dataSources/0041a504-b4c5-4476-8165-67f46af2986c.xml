@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="hibernate.cfg.xml/Hibernate">
+  <database-model serializer="dbm" rdbms="ORACLE" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="IGOR">
+      <ObjectId>50</ObjectId>
+      <IntrospectionTimestamp>2017-04-07.02:40:15</IntrospectionTimestamp>
+      <CreatedTimestamp>2017-03-29.17:28:37</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:16</ModifiedTimestamp>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="PUBLIC">
+      <ObjectId>1</ObjectId>
+    </schema>
+    <schema id="4" parent="1" name="SYS">
+      <ObjectId>0</ObjectId>
+    </schema>
+    <schema id="5" parent="1" name="SYSTEM">
+      <ObjectId>5</ObjectId>
+    </schema>
+    <schema id="6" parent="1" name="OUTLN">
+      <ObjectId>9</ObjectId>
+    </schema>
+    <schema id="7" parent="1" name="CTXSYS">
+      <ObjectId>32</ObjectId>
+    </schema>
+    <schema id="8" parent="1" name="XDB">
+      <ObjectId>34</ObjectId>
+    </schema>
+    <schema id="9" parent="1" name="ANONYMOUS">
+      <ObjectId>35</ObjectId>
+    </schema>
+    <schema id="10" parent="1" name="MDSYS">
+      <ObjectId>42</ObjectId>
+    </schema>
+    <schema id="11" parent="1" name="HR">
+      <ObjectId>43</ObjectId>
+    </schema>
+    <schema id="12" parent="1" name="FLOWS_FILES">
+      <ObjectId>44</ObjectId>
+    </schema>
+    <schema id="13" parent="1" name="APEX_PUBLIC_USER">
+      <ObjectId>45</ObjectId>
+    </schema>
+    <schema id="14" parent="1" name="APEX_040000">
+      <ObjectId>47</ObjectId>
+    </schema>
+    <schema id="15" parent="1" name="XS$NULL">
+      <ObjectId>2147483638</ObjectId>
+    </schema>
+    <sequence id="16" parent="2" name="DEPARTUREIDSEQUENCE">
+      <ObjectId>21077</ObjectId>
+      <CreatedTimestamp>2017-04-07.02:01:03</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:03</ModifiedTimestamp>
+      <SequenceIdentity>1</SequenceIdentity>
+    </sequence>
+    <sequence id="17" parent="2" name="DIAGNOSISIDSEQUENCE">
+      <ObjectId>21076</ObjectId>
+      <CreatedTimestamp>2017-04-07.02:01:03</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:03</ModifiedTimestamp>
+      <SequenceIdentity>1</SequenceIdentity>
+    </sequence>
+    <sequence id="18" parent="2" name="PEOPLEIDSEQUENCE">
+      <ObjectId>21074</ObjectId>
+      <CreatedTimestamp>2017-04-07.02:01:03</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:03</ModifiedTimestamp>
+      <SequenceIdentity>1</SequenceIdentity>
+    </sequence>
+    <sequence id="19" parent="2" name="WARDIDSEQUENCE">
+      <ObjectId>21075</ObjectId>
+      <CreatedTimestamp>2017-04-07.02:01:03</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:03</ModifiedTimestamp>
+      <SequenceIdentity>1</SequenceIdentity>
+    </sequence>
+    <table id="20" parent="2" name="DEPARTURES">
+      <ObjectId>21066</ObjectId>
+      <CreatedTimestamp>2017-04-07.02:01:00</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:00</ModifiedTimestamp>
+    </table>
+    <table id="21" parent="2" name="DIAGNOSIS">
+      <ObjectId>21070</ObjectId>
+      <CreatedTimestamp>2017-04-07.02:01:02</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:16</ModifiedTimestamp>
+    </table>
+    <table id="22" parent="2" name="PEOPLE">
+      <ObjectId>21072</ObjectId>
+      <CreatedTimestamp>2017-04-07.02:01:02</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:16</ModifiedTimestamp>
+    </table>
+    <table id="23" parent="2" name="WARDS">
+      <ObjectId>21068</ObjectId>
+      <CreatedTimestamp>2017-04-07.02:01:02</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:02</ModifiedTimestamp>
+    </table>
+    <view id="24" parent="2" name="ALL_WARDS">
+      <ObjectId>20805</ObjectId>
+      <CreatedTimestamp>2017-03-29.17:28:37</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:05</ModifiedTimestamp>
+    </view>
+    <view id="25" parent="2" name="PEOPLE_VIEW">
+      <ObjectId>20802</ObjectId>
+      <CreatedTimestamp>2017-03-29.17:28:37</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:03</ModifiedTimestamp>
+    </view>
+    <view id="26" parent="2" name="PEOPLE_VIEW_DIAG_1_WARD_2">
+      <ObjectId>20803</ObjectId>
+      <CreatedTimestamp>2017-03-29.17:28:37</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:05</ModifiedTimestamp>
+    </view>
+    <view id="27" parent="2" name="WARD_VIEW_WITH_ONE_DIAGNOSIS">
+      <ObjectId>20804</ObjectId>
+      <CreatedTimestamp>2017-03-29.17:28:37</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:05</ModifiedTimestamp>
+    </view>
+    <routine id="28" parent="2" name="LEASTRATIOPLACE">
+      <ObjectId>20806</ObjectId>
+      <RoutineKind>procedure</RoutineKind>
+      <CreatedTimestamp>2017-03-29.17:28:38</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:05</ModifiedTimestamp>
+    </routine>
+    <column id="29" parent="20" name="DEPARTUREID">
+      <Position>1</Position>
+      <DataType>NUMBER(*,2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="30" parent="20" name="DEPARTURENAME">
+      <Position>2</Position>
+      <DataType>VARCHAR2(50)|0</DataType>
+    </column>
+    <index id="31" parent="20" name="DEPARTUREIDPK">
+      <ObjectId>21067</ObjectId>
+      <CreatedTimestamp>2017-04-07.02:01:00</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:00</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>DEPARTUREID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="32" parent="20" name="DEPARTUREIDPK">
+      <ModifiedTimestamp>2017-04-07.02:01:00</ModifiedTimestamp>
+      <ColNames>DEPARTUREID</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>DEPARTUREIDPK</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="33" parent="21" name="DIAGNOSISID">
+      <Position>1</Position>
+      <DataType>NUMBER(*,2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="34" parent="21" name="DIAGNOSISNAME">
+      <Position>2</Position>
+      <DataType>VARCHAR2(50)|0</DataType>
+    </column>
+    <column id="35" parent="21" name="DEPARTUREID">
+      <Position>3</Position>
+      <DataType>NUMBER(*,2)|0</DataType>
+    </column>
+    <index id="36" parent="21" name="DIAGNOSISIDPK">
+      <ObjectId>21071</ObjectId>
+      <CreatedTimestamp>2017-04-07.02:01:02</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:02</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>DIAGNOSISID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="37" parent="21" name="DIAGNOSISIDPK">
+      <ModifiedTimestamp>2017-04-07.02:01:02</ModifiedTimestamp>
+      <ColNames>DIAGNOSISID</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>DIAGNOSISIDPK</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="38" parent="21" name="DIAGNOSISDEPARTUREIDFK">
+      <ModifiedTimestamp>2017-04-07.02:01:02</ModifiedTimestamp>
+      <ColNames>DEPARTUREID</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <RefTableName>DEPARTURES</RefTableName>
+      <RefKeyName>DEPARTUREIDPK</RefKeyName>
+    </foreign-key>
+    <trigger id="39" parent="21" name="NO_EQUIVALENT_DIAGNOSIS">
+      <ObjectId>21065</ObjectId>
+      <CreatedTimestamp>2017-04-07.02:01:16</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:16</ModifiedTimestamp>
+      <Events>I</Events>
+      <Turn>before-row</Turn>
+    </trigger>
+    <column id="40" parent="22" name="PEOPLEID">
+      <Position>1</Position>
+      <DataType>NUMBER(*)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="41" parent="22" name="FIRSTNAME">
+      <Position>2</Position>
+      <DataType>VARCHAR2(40)|0</DataType>
+    </column>
+    <column id="42" parent="22" name="LASTNAME">
+      <Position>3</Position>
+      <DataType>VARCHAR2(40)|0</DataType>
+    </column>
+    <column id="43" parent="22" name="FATHERNAME">
+      <Position>4</Position>
+      <DataType>VARCHAR2(40)|0</DataType>
+    </column>
+    <column id="44" parent="22" name="DIAGNOSISID">
+      <Position>5</Position>
+      <DataType>NUMBER(*)|0</DataType>
+    </column>
+    <column id="45" parent="22" name="WARDID">
+      <Position>6</Position>
+      <DataType>NUMBER(*)|0</DataType>
+    </column>
+    <index id="46" parent="22" name="STUDENTIDPK">
+      <ObjectId>21073</ObjectId>
+      <CreatedTimestamp>2017-04-07.02:01:02</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:02</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>PEOPLEID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="47" parent="22" name="STUDENTIDPK">
+      <ModifiedTimestamp>2017-04-07.02:01:03</ModifiedTimestamp>
+      <ColNames>PEOPLEID</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>STUDENTIDPK</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="48" parent="22" name="DIAGNOSISIDFK">
+      <ModifiedTimestamp>2017-04-07.02:01:03</ModifiedTimestamp>
+      <ColNames>DIAGNOSISID</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <RefTableName>DIAGNOSIS</RefTableName>
+      <RefKeyName>DIAGNOSISIDPK</RefKeyName>
+    </foreign-key>
+    <foreign-key id="49" parent="22" name="WARDIDFK">
+      <ModifiedTimestamp>2017-04-07.02:01:03</ModifiedTimestamp>
+      <ColNames>WARDID</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <RefTableName>WARDS</RefTableName>
+      <RefKeyName>WARDIDPK</RefKeyName>
+    </foreign-key>
+    <trigger id="50" parent="22" name="NO_ADD_PEOPLE_WITH_EMPTY_NAMES">
+      <ObjectId>21063</ObjectId>
+      <CreatedTimestamp>2017-04-07.02:01:16</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:16</ModifiedTimestamp>
+      <Events>I</Events>
+      <Turn>before-row</Turn>
+    </trigger>
+    <trigger id="51" parent="22" name="NO_ADD_TO_BUSY_WARD">
+      <ObjectId>21062</ObjectId>
+      <CreatedTimestamp>2017-04-07.02:01:15</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:15</ModifiedTimestamp>
+      <Events>I</Events>
+      <Turn>before-row</Turn>
+    </trigger>
+    <column id="52" parent="23" name="WARDID">
+      <Position>1</Position>
+      <DataType>NUMBER(*)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="53" parent="23" name="WARDNAME">
+      <Position>2</Position>
+      <DataType>VARCHAR2(50)|0</DataType>
+    </column>
+    <column id="54" parent="23" name="MAXCOUNT">
+      <Position>3</Position>
+      <DataType>NUMBER(*)|0</DataType>
+    </column>
+    <column id="55" parent="23" name="DEPARTUREID">
+      <Position>4</Position>
+      <DataType>NUMBER(*,2)|0</DataType>
+    </column>
+    <index id="56" parent="23" name="WARDIDPK">
+      <ObjectId>21069</ObjectId>
+      <CreatedTimestamp>2017-04-07.02:01:02</CreatedTimestamp>
+      <ModifiedTimestamp>2017-04-07.02:01:02</ModifiedTimestamp>
+      <TablespaceName>USERS</TablespaceName>
+      <ColNames>WARDID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="57" parent="23" name="WARDIDPK">
+      <ModifiedTimestamp>2017-04-07.02:01:02</ModifiedTimestamp>
+      <ColNames>WARDID</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>WARDIDPK</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="58" parent="23" name="WARDSDEPARTUREIDFK">
+      <ModifiedTimestamp>2017-04-07.02:01:02</ModifiedTimestamp>
+      <ColNames>DEPARTUREID</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <RefTableName>DEPARTURES</RefTableName>
+      <RefKeyName>DEPARTUREIDPK</RefKeyName>
+    </foreign-key>
+    <column id="59" parent="24" name="Номер палаты">
+      <Position>1</Position>
+      <DataType>VARCHAR2(50)|0</DataType>
+    </column>
+    <column id="60" parent="24" name="Вместимость">
+      <Position>2</Position>
+      <DataType>NUMBER(*)|0</DataType>
+    </column>
+    <column id="61" parent="24" name="Занято">
+      <Position>3</Position>
+      <DataType>NUMBER(*)|0</DataType>
+    </column>
+    <column id="62" parent="24" name="Диагноз">
+      <Position>4</Position>
+      <DataType>VARCHAR2(50)|0</DataType>
+    </column>
+    <column id="63" parent="25" name="FIRSTNAME">
+      <Position>1</Position>
+      <DataType>VARCHAR2(40)|0</DataType>
+    </column>
+    <column id="64" parent="25" name="LASTNAME">
+      <Position>2</Position>
+      <DataType>VARCHAR2(40)|0</DataType>
+    </column>
+    <column id="65" parent="25" name="FATHERNAME">
+      <Position>3</Position>
+      <DataType>VARCHAR2(40)|0</DataType>
+    </column>
+    <column id="66" parent="25" name="DIAGNOSIS">
+      <Position>4</Position>
+      <DataType>VARCHAR2(50)|0</DataType>
+    </column>
+    <column id="67" parent="25" name="WARD">
+      <Position>5</Position>
+      <DataType>VARCHAR2(50)|0</DataType>
+    </column>
+    <column id="68" parent="26" name="FIRSTNAME">
+      <Position>1</Position>
+      <DataType>VARCHAR2(40)|0</DataType>
+    </column>
+    <column id="69" parent="26" name="LASTNAME">
+      <Position>2</Position>
+      <DataType>VARCHAR2(40)|0</DataType>
+    </column>
+    <column id="70" parent="26" name="FATHERNAME">
+      <Position>3</Position>
+      <DataType>VARCHAR2(40)|0</DataType>
+    </column>
+    <column id="71" parent="26" name="DIAGNOSIS">
+      <Position>4</Position>
+      <DataType>VARCHAR2(50)|0</DataType>
+    </column>
+    <column id="72" parent="26" name="WARD">
+      <Position>5</Position>
+      <DataType>VARCHAR2(50)|0</DataType>
+    </column>
+    <column id="73" parent="27" name="WARDNAME">
+      <Position>1</Position>
+      <DataType>VARCHAR2(50)|0</DataType>
+    </column>
+    <argument id="74" parent="28" name="C_V_WARDID">
+      <DataType>NUMBER|0</DataType>
+    </argument>
+    <argument id="75" parent="28" name="V_RESULT1">
+      <ArgumentDirection>O</ArgumentDirection>
+      <DataType>NUMBER|0</DataType>
+    </argument>
+    <argument id="76" parent="28" name="V_RESULT2">
+      <ArgumentDirection>O</ArgumentDirection>
+      <DataType>NUMBER|0</DataType>
+    </argument>
+  </database-model>
+</dataSource>
