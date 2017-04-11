@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="hibernate.cfg.xml/Hibernate" uuid="0041a504-b4c5-4476-8165-67f46af2986c">
+      <database-info product="Oracle" version="Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production" jdbc-version="4.0" driver-name="Oracle JDBC driver" driver-version="12.1.0.2.0">
+        <extra-name-characters>$#</extra-name-characters>
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>igor</user-name>
+    </data-source>
+    <data-source name="skillself.db" uuid="eecf374e-7e42-497d-a32e-087f89ac71ad">
+      <database-info product="SQLite" version="3.16.1" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native" />
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <secret-storage>master_key</secret-storage>
+      <auth-required>false</auth-required>
+    </data-source>
+    <data-source name="@localhost" uuid="0730281b-e2c3-48cb-9425-3225f5a2b0a6">
+      <database-info product="Oracle" version="Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production" jdbc-version="4.0" driver-name="Oracle JDBC driver" driver-version="12.1.0.2.0">
+        <extra-name-characters>$#</extra-name-characters>
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>IGOR</user-name>
+      <resolve-scope>*:IGOR,PUBLIC</resolve-scope>
+    </data-source>
+    <data-source name="jdbc" uuid="16f29b40-26cc-42b2-a7cd-93532abfd60b">
+      <database-info product="SQLite" version="3.16.1" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native" />
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <auth-required>false</auth-required>
+    </data-source>
+    <data-source name="oracle.hospital:hibernate.cfg.xml/Hibernate" uuid="0e8b341f-ff40-4add-abd4-580b9d31a7d1">
+      <database-info product="Oracle" version="Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production" jdbc-version="4.0" driver-name="Oracle JDBC driver" driver-version="12.1.0.2.0">
+        <extra-name-characters>$#</extra-name-characters>
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
+      <user-name>IGOR</user-name>
+      <user-password>dfc0dfcedfc8dfc9df90dfc5dfd8dfcbdfc9dfc6dfcfdf90dfdedfc2dfc3dfc4df90dfeadfc6dfc5dfc9dfcbdfc6dfc2dfc5dfd9dfdedf90df9bdf9fdf98df9bdf90dff2dfef</user-password>
+    </data-source>
+    <data-source name="dataSourceBasic" uuid="022e895a-a908-4d72-b673-f95593d0de78">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+    </data-source>
+    <data-source name="dataSource" uuid="3e8527a6-0aee-4273-b295-f800bcb56f05">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+    </data-source>
+  </component>
+</project>

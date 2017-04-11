@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="technopolis.homework.first.LinkedListTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2017-03-31T17:38:16" hostname="pupsik" time="1.503">
+  <properties/>
+  <testcase name="toArrayTest" classname="technopolis.homework.first.LinkedListTest" time="0.575"/>
+  <testcase name="testAddingAtEnd" classname="technopolis.homework.first.LinkedListTest" time="0.104"/>
+  <testcase name="testClear" classname="technopolis.homework.first.LinkedListTest" time="0.016"/>
+  <testcase name="testSize" classname="technopolis.homework.first.LinkedListTest" time="0.0"/>
+  <testcase name="testAddingAtCenter" classname="technopolis.homework.first.LinkedListTest" time="0.465"/>
+  <testcase name="testContains" classname="technopolis.homework.first.LinkedListTest" time="0.02"/>
+  <testcase name="addAllTest" classname="technopolis.homework.first.LinkedListTest" time="0.15"/>
+  <testcase name="removeTest" classname="technopolis.homework.first.LinkedListTest" time="0.004"/>
+  <testcase name="testEquals" classname="technopolis.homework.first.LinkedListTest" time="0.0"/>
+  <testcase name="testIndexOf" classname="technopolis.homework.first.LinkedListTest" time="0.166"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
+
