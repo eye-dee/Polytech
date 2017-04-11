@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import skillself.spring.sqlite.dao.ContactDao;
 import skillself.spring.sqlite.object.Contact;
+import skillself.spring.sqlite.object.ContactPhoneDetail;
 
 /**
  * Polytech
@@ -22,17 +23,27 @@ public class JdbcJavaConfigSample {
         final Contact contact = contactDao.findAll().get(0);
         final Contact newContact = Contact.builder()
                 .id(contact.getId())
-                .firstName("firstName")
-                .lastName("lastName")
+                .firstName("firstName2")
+                .lastName("lastName2")
                 .birthDate(contact.getBirthDate())
                 .build();
 
+        newContact.addPhoneDetail(ContactPhoneDetail.builder().build());
+        newContact.addPhoneDetail(ContactPhoneDetail.builder().build());
+        newContact.addPhoneDetail(ContactPhoneDetail.builder().build());
+
         contactDao.update(newContact);
-        System.out.println("-----------------------------------------");
+        System.out.println("After Update \n-----------------------------------------");
         contactDao.findAll().forEach(System.out::println);
 
         contactDao.update(contact);
-        System.out.println("-----------------------------------------");
+        System.out.println("After update \n-----------------------------------------");
         contactDao.findAll().forEach(System.out::println);
+
+        final long id = contactDao.insert(newContact);
+        System.out.println("After insert \n-----------------------------------------");
+        contactDao.findAll().forEach(System.out::println);
+        System.out.println("Identifier inserted = " + id);
+
     }
 }

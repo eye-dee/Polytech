@@ -6,12 +6,17 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.object.SqlUpdate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import skillself.spring.sqlite.object.Contact;
 import skillself.spring.sqlite.object.ContactPhoneDetail;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,9 +74,16 @@ public class ContactDaoImpl implements ContactDao, InitializingBean {
         return map.values().stream().collect(Collectors.toList());
     };
 
+    /*private static final String SQL_UPDATE_CONTACT = "Update Contact set " +
+            "firstName = :firstName, lastName = :lastName, birthDate = :birthDate where id = :id";
+    private static final String SQL_INSERT_CONTACT = "Insert Into Contact (firstName, lastName, birthDate) " +
+            "Values (:firstName, :lastName, :birthDate)";*/
+
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private SqlUpdate sqlUpdate;
+    private SqlUpdate sqlInsert;
 
     /*public ContactDaoImpl(final DataSource dataSource,
                           final JdbcTemplate jdbcTemplate,
@@ -81,14 +93,28 @@ public class ContactDaoImpl implements ContactDao, InitializingBean {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }*/
 
-    public void setDataSource(final DataSource dataSource) {
+   /* public void setDataSource(final DataSource dataSource) {
         this.dataSource = dataSource;
         jdbcTemplate = new JdbcTemplate();
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
         jdbcTemplate.setDataSource(dataSource);
 
+        // TODO: 10.04.17 to Java config
+        sqlUpdate = new SqlUpdate(dataSource,SQL_UPDATE_CONTACT);
+        sqlUpdate.declareParameter(new SqlParameter("firstName", Types.VARCHAR));
+        sqlUpdate.declareParameter(new SqlParameter("lastName", Types.VARCHAR));
+        sqlUpdate.declareParameter(new SqlParameter("birthDate", Types.DATE));
+        sqlUpdate.declareParameter(new SqlParameter("id", Types.INTEGER));
+
+        sqlInsert = new SqlUpdate(dataSource,SQL_INSERT_CONTACT);
+        sqlInsert.declareParameter(new SqlParameter("firstName", Types.VARCHAR));
+        sqlInsert.declareParameter(new SqlParameter("lastName", Types.VARCHAR));
+        sqlInsert.declareParameter(new SqlParameter("birthDate", Types.DATE));
+        sqlInsert.setGeneratedKeysColumnNames(new String[]{"id"});
+        sqlInsert.setReturnGeneratedKeys(true);
+
         System.out.println("dataSource = " + dataSource);
-    }
+    }*/
 
     @Override
     public List<Contact> findAll() {
@@ -133,15 +159,31 @@ public class ContactDaoImpl implements ContactDao, InitializingBean {
 
     @Override
     public long insert(final Contact contact) {
-        return -1;
+        final Map<String,Object> parameters = new HashMap<>();
+        parameters.put("firstName",contact.getFirstName());
+        parameters.put("lastName",contact.getLastName());
+        parameters.put("birthDate",contact.getBirthDate());
+
+        final KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        sqlInsert.updateByNamedParam(parameters,keyHolder);
+
+        return keyHolder.getKey().longValue();
+        //return Contact.builder()...build();
+        // TODO: 10.04.17 log it
     }
 
     @Override
     public void update(final Contact contact) {
-        jdbcTemplate.update("UPDATE Contact " +
-                "SET firstName = ?, lastName = ?, birthDate = ? " +
-                "WHERE id = ?",
-                new Object[]{contact.getFirstName(), contact.getLastName(), contact.getBirthDate(), contact.getId()});
+        final Map<String,Object> parameters = new HashMap<>();
+        parameters.put("firstName",contact.getFirstName());
+        parameters.put("lastName",contact.getLastName());
+        parameters.put("birthDate",contact.getBirthDate());
+        parameters.put("id",contact.getId());
+
+        sqlUpdate.updateByNamedParam(parameters);
+
+        // TODO: 10.04.17 log it
     }
 
     @Override
