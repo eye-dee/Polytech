@@ -9,6 +9,7 @@
           p:driverClassName="${jdbc.driverClassName}"
           p:url="${jdbc.url}"/>
 
+
     <bean id="contactDao" class="skillself.spring.sqlite.dao.ContactDaoImpl"
           p:dataSource-ref="dataSource"/>
 

@@ -93,35 +93,32 @@ public class ContactDaoImpl implements ContactDao, InitializingBean {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }*/
 
-   /* public void setDataSource(final DataSource dataSource) {
+    public void setDataSource(final DataSource dataSource) {
         this.dataSource = dataSource;
         jdbcTemplate = new JdbcTemplate();
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
         jdbcTemplate.setDataSource(dataSource);
 
-        // TODO: 10.04.17 to Java config
-        sqlUpdate = new SqlUpdate(dataSource,SQL_UPDATE_CONTACT);
+     /*   // TODO: 10.04.17 to Java config
+        sqlUpdate = new SqlUpdate(dataSource, SQL_UPDATE_CONTACT);
         sqlUpdate.declareParameter(new SqlParameter("firstName", Types.VARCHAR));
         sqlUpdate.declareParameter(new SqlParameter("lastName", Types.VARCHAR));
         sqlUpdate.declareParameter(new SqlParameter("birthDate", Types.DATE));
         sqlUpdate.declareParameter(new SqlParameter("id", Types.INTEGER));
 
-        sqlInsert = new SqlUpdate(dataSource,SQL_INSERT_CONTACT);
+        sqlInsert = new SqlUpdate(dataSource, SQL_INSERT_CONTACT);
         sqlInsert.declareParameter(new SqlParameter("firstName", Types.VARCHAR));
         sqlInsert.declareParameter(new SqlParameter("lastName", Types.VARCHAR));
         sqlInsert.declareParameter(new SqlParameter("birthDate", Types.DATE));
         sqlInsert.setGeneratedKeysColumnNames(new String[]{"id"});
         sqlInsert.setReturnGeneratedKeys(true);
 
-        System.out.println("dataSource = " + dataSource);
-    }*/
+        System.out.println("dataSource = " + dataSource);*/
+    }
 
     @Override
     public List<Contact> findAll() {
-        return jdbcTemplate.query(
-                "select * from Contact",
-                CONTACT_MAPPER
-        );
+        return jdbcTemplate.query("select * from Contact",CONTACT_MAPPER);
     }
 
     @Override

@@ -1,8 +1,11 @@
 package skillself.spring.sqlite;
 
+import org.omg.CORBA.Environment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -11,6 +14,7 @@ import org.springframework.jdbc.object.SqlUpdate;
 import skillself.spring.sqlite.dao.ContactDao;
 import skillself.spring.sqlite.dao.ContactDaoImpl;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.sql.Types;
 
@@ -20,13 +24,20 @@ import java.sql.Types;
  */
 
 @Configuration
-//@PropertySource(value = "classpath:spring/sqlite/jdbc.properties")
 @ComponentScan(basePackages = "skillself.spring.sqlite")
+//@PropertySource(value = "classpath:spring/sqlite/jdbc.propertires")
 public class SqliteJavaConfig {
+    /*private final Environment env;*/
+
     private static final String SQL_UPDATE_CONTACT = "Update Contact set " +
             "firstName = :firstName, lastName = :lastName, birthDate = :birthDate where id = :id";
     private static final String SQL_INSERT_CONTACT = "Insert Into Contact (firstName, lastName, birthDate) " +
             "Values (:firstName, :lastName, :birthDate)";
+
+    /*@Autowired
+    public SqliteJavaConfig(Environment env) {
+        this.env = env;
+    }*/
 
     @Bean
     public DataSource dataSource() {

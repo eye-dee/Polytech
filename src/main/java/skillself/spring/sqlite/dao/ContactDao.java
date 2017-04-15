@@ -8,6 +8,7 @@ import java.util.List;
  * Polytech
  * Created by igor on 04.04.17.
  */
+
 public interface ContactDao {
     List<Contact> findAll();
     List<Contact> findByFirstName(String firstName);

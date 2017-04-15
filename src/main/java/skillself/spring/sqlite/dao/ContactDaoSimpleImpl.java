@@ -92,7 +92,10 @@ public class ContactDaoSimpleImpl implements ContactDao {
     @Override
     public String findLastNameById(final Long id) {
         try (Connection connection = getConnection()) {
-            final ResultSet resultSet = executeQuery(connection, "select * from contact where id = ?", String.valueOf(id));
+            final ResultSet resultSet = executeQuery(
+                    connection,
+                    "select * from contact where id = ?",
+                    String.valueOf(id));
 
             resultSet.next();
             return resultSet.getString("lastName");

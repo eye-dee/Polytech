@@ -32,7 +32,10 @@ repositories {
 }
 
 dependencies {
+    compile files('libs/ojdbc14.jar')
+
     compileOnly "org.projectlombok:lombok:1.16.16"
+
 
     //asertJ unit tests
     compile group: 'org.assertj', name: 'assertj-core', version: '3.6.2'

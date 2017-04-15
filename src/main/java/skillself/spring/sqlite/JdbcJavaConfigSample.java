@@ -45,5 +45,6 @@ public class JdbcJavaConfigSample {
         contactDao.findAll().forEach(System.out::println);
         System.out.println("Identifier inserted = " + id);
 
+        contactDao.delete(newContact.getId());
     }
 }
