@@ -14,4 +14,6 @@ public interface PeopleDao {
     People insert(People people);
 
     void deleteById(long id);
+
+    void deleteByWardId(long id);
 }

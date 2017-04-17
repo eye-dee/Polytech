@@ -1,12 +1,13 @@
 package hospital.impl;
 
 import hospital.dao.DiagnosisDao;
+import hospital.dao.PeopleDao;
 import hospital.types.Diagnosis;
 import hospital.types.People;
 import lombok.AllArgsConstructor;
-import hospital.dao.PeopleDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -32,7 +33,7 @@ public class PeopleDaoImpl implements PeopleDao {
     @Override
     public List<People> findAll() {
         try(Session session = sessionFactory.openSession()) {
-            final List<People> peoples = session.createQuery("from People").list();
+            final List<People> peoples = session.createQuery("FROM People").list();
 
             final List<Diagnosis> diagnoses = diagnosisDao.findAll();
 
@@ -61,8 +62,35 @@ public class PeopleDaoImpl implements PeopleDao {
     @Override
     public void deleteById(final long id) {
         try (Session session = sessionFactory.openSession()) {
-            session.delete(People.builder().peopleId(id).build());
-            LOGGER.info("People with id {} was deleted",id);
+            final Object persistentInstance = session.load(People.class, id);
+            if (persistentInstance != null) {
+                session.beginTransaction();
+                session.delete(persistentInstance);
+                session.getTransaction().commit();
+                LOGGER.info("People with id {} was deleted", id);
+            } else {
+                LOGGER.error("No People with id {}", id);
+            }
+        }
+    }
+
+    @Override
+    public void deleteByWardId(final long id) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+
+            final Query query = session.createQuery("delete People where wardId = :id");
+            query.setParameter("id",id);
+
+            final int result = query.executeUpdate();
+
+            if (result > 0) {
+                LOGGER.info("From People table was deleted {} rows", result);
+            } else {
+                LOGGER.info("No people in ward {} or some error",id);
+            }
+
+            session.getTransaction().commit();
         }
     }
 }

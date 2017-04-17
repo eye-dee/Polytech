@@ -12,4 +12,6 @@ public interface DepartureDao {
     List<Departure> findAll();
 
     List<Departure> findAllWithWards();
+
+    void deleteDeparture(long id);
 }

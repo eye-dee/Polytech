@@ -58,7 +58,7 @@ public class ApplicationConfig {
 
     @Bean
     DepartureDao departureDao() {
-        return new DepartureDaoImpl(sessionFactory(),wardDao());
+        return new DepartureDaoImpl(sessionFactory(),wardDao(),diagnosisDao());
     }
 
     @Bean

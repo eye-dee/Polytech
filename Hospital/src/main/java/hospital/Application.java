@@ -49,8 +49,12 @@ public class Application {
         departures.forEach(System.out::println);
         System.out.println("--------------------------");
 
-        peopleDao.deleteById(1);
-        peopleDao.findAll().forEach(System.out::println);
+        /*peopleDao.deleteById(1);
+        peopleDao.findAll().forEach(System.out::println);*/
+
+       // wardDao.deleteById(1);
+
+        departureDao.deleteDeparture(1);
 
         /*peopleDao.insert(new People(0,"firtName","lastName","fatherName",1,1));
         System.out.println("inserted");*/

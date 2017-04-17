@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface DiagnosisDao {
     List<Diagnosis> findAll();
+
+    void deleteByDepartureId(long id);
 }

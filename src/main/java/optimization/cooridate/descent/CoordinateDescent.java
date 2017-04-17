@@ -1,8 +1,8 @@
 package optimization.cooridate.descent;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,23 +15,7 @@ import java.util.function.Function;
 
 @Data
 public class CoordinateDescent {
-    private List<Pair> pairs = new LinkedList<>();
-
-    @Data
-    @AllArgsConstructor
-    public static class Pair<T1,T2> {
-        T1 first;
-        T2 second;
-
-        Pair() {
-
-        }
-
-        @Override
-        protected Pair<T1,T2> clone() throws CloneNotSupportedException {
-            return new Pair<T1,T2>(first,second);
-        }
-    }
+    private List<Pair<Double,Double>> pairs = new LinkedList<>();
 
     private final Function<Pair<Double,Double>,Double> f;
     private final Function<Double,Double> df1;
@@ -50,46 +34,45 @@ public class CoordinateDescent {
     }
 
     public Pair<Double,Double> oneStepPoint() {
-        return new Pair<>(
-                df1.apply(startPoint.getSecond()),
-                df2.apply(startPoint.getFirst())
+        return Pair.of(
+                df1.apply(startPoint.getRight()),
+                df2.apply(startPoint.getLeft())
         );
     }
 
     public Pair<Double,Double> make() {
-        final Pair<Double,Double> currentPoint = new Pair<>(startPoint.getFirst(),startPoint.getSecond());
+        Pair<Double,Double> currentPoint = Pair.of(startPoint.getLeft(),startPoint.getRight());
         for (int i = 0; i < 3; ++i) {
-            System.out.println(String.format("(%s;%s)",currentPoint.getFirst(),currentPoint.getSecond()));
+            System.out.println(String.format("(%s;%s)",currentPoint.getLeft(),currentPoint.getRight()));
             System.out.println("current F = " + f.apply(currentPoint));
-            double prev = currentPoint.getFirst();
-            currentPoint.setFirst(df1.apply(currentPoint.getSecond()));
-            try {
-                pairs.add(currentPoint.clone());
-            } catch (CloneNotSupportedException e) {
-                e.printStackTrace();
-            }
+            double prev = currentPoint.getLeft();
+            currentPoint = Pair.of(df1.apply(currentPoint.getRight()),currentPoint.getRight());
+
+            pairs.add(Pair.of(currentPoint.getLeft(),currentPoint.getRight()));
+
             System.out.println("F after change x1 = " + f.apply(currentPoint));
-            System.out.println("h по x1 = " + (currentPoint.getFirst() - prev));
+            System.out.println("h по x1 = " + (currentPoint.getLeft() - prev));
             System.out.println("-------------------------------------------");
 
-            System.out.println(String.format("(%s;%s)",currentPoint.getFirst(),currentPoint.getSecond()));
-            prev = currentPoint.getSecond();
-            currentPoint.setSecond(df2.apply(currentPoint.getFirst()));
-            try {
-                pairs.add(currentPoint.clone());
-            } catch (CloneNotSupportedException e) {
-                e.printStackTrace();
-            }
+            System.out.println(String.format("(%s;%s)",currentPoint.getLeft(),currentPoint.getRight()));
+            prev = currentPoint.getRight();
+            currentPoint = Pair.of(currentPoint.getLeft(),df2.apply(currentPoint.getLeft()));
+
+            pairs.add(Pair.of(currentPoint.getLeft(),currentPoint.getRight()));
+
             System.out.println("F after change x2 = " + f.apply(currentPoint));
-            System.out.println("h по x2 = " + (currentPoint.getSecond() - prev));
-            System.out.println(String.format("(%s;%s)",currentPoint.getFirst(),currentPoint.getSecond()));
+            System.out.println("h по x2 = " + (currentPoint.getRight() - prev));
+            System.out.println(String.format("(%s;%s)",currentPoint.getLeft(),currentPoint.getRight()));
             System.out.println("-------------------------------------------");
         }
 
 
         for (int i = 0; i < 1000; ++i) {
-            currentPoint.setFirst(df1.apply(currentPoint.getSecond()));
-            currentPoint.setSecond(df2.apply(currentPoint.getFirst()));
+
+            currentPoint = Pair.of(
+                    df1.apply(currentPoint.getRight()),
+                    df2.apply(currentPoint.getLeft())
+            );
         }
 
         return currentPoint;

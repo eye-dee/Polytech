@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "DIAGNOSIS")
 public class Diagnosis {
+    private static final long serialVersionUID = 0;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

@@ -1,5 +1,6 @@
 package hospital.impl;
 
+import hospital.dao.DiagnosisDao;
 import hospital.types.Departure;
 import hospital.types.Ward;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ import java.util.List;
 public class DepartureDaoImpl implements DepartureDao {
     final private SessionFactory sessionFactory;
     final private WardDao wardDao;
+    final private DiagnosisDao diagnosisDao;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartureDaoImpl.class);
 
@@ -46,5 +48,22 @@ public class DepartureDaoImpl implements DepartureDao {
         wards.forEach(ward -> departureHashMap.get(ward.getDepartureId()).addWard(ward));
 
         return departureWithOutWards;
+    }
+
+    @Override
+    public void deleteDeparture(final long id) {
+        try (Session session = sessionFactory.openSession()) {
+            final Object persistentInstance = session.load(Departure.class, id);
+            if (persistentInstance != null) {
+                session.beginTransaction();
+                wardDao.deleteByDepartureId(id);
+                diagnosisDao.deleteByDepartureId(id);
+                session.delete(persistentInstance);
+                session.getTransaction().commit();
+                LOGGER.info("Ward with id {} was deleted with all people", id);
+            } else {
+                LOGGER.error("No Ward with id {}", id);
+            }
+        }
     }
 }

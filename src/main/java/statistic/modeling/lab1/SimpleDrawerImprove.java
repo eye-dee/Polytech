@@ -14,37 +14,32 @@ import java.util.List;
 
 /**
  * Polytech
- * Created by Игорь on 23.02.2017.
+ * Created by igor on 17.04.17.
  */
-public class SimpleDrawer implements Drawer {
+public class SimpleDrawerImprove implements Drawer {
+    public static final int WIDTH = 400;
+    public static final int HEIGHT = 300;
     private final String name;
-    private List<Double> y;
-    private List<Double> x;
+    private final JFrame frame =
+            new JFrame("MinimalStaticChart");
 
-    public SimpleDrawer(final String name){
+    public SimpleDrawerImprove(final String name) {
         this.name = name;
     }
 
-    public void setX(final List<Double> x) {
-        this.x = x;
-    }
+    public void addChartPanelWithDefaultX(final List<Double> y) {
+        final List<Double> x = new ArrayList<>();
 
-    public void createDefaultX(){
-        x = new ArrayList<>();
-
-        for (int i = 0; i < y.size(); ++i){
-            x.add((double)i);
+        for (int i = 0; i < y.size(); ++i) {
+            x.add((double) i);
         }
+
+        addChartPanel(x, y);
     }
 
-    public void setY(final List<Double> y) {
-        this.y = y;
-    }
-
-    @Override
-    public void draw(){
+    public void addChartPanel(final List<Double> x, final List<Double> y) {
         final XYSeries xySeries = new XYSeries(name);
-        for(int i = 0; i < x.size(); ++i){
+        for (int i = 0; i < x.size(); ++i) {
             xySeries.add(x.get(i), y.get(i));
         }
 
@@ -54,12 +49,14 @@ public class SimpleDrawer implements Drawer {
                         xyDataset,
                         PlotOrientation.VERTICAL,
                         true, true, true);
-        final JFrame frame =
-                new JFrame("MinimalStaticChart");
         // Помещаем график на фрейм
         frame.getContentPane()
                 .add(new ChartPanel(chart));
-        frame.setSize(400,300);
+    }
+
+    @Override
+    public void draw() {
+        frame.setSize(WIDTH, HEIGHT);
         frame.setVisible(true);
     }
 }

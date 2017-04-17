@@ -17,6 +17,8 @@ import java.util.List;
 @Entity
 @Table(name = "DEPARTURES")
 public class Departure {
+    private static final long serialVersionUID = 0;
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "departureId")

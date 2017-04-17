@@ -2,8 +2,8 @@ package optimization.cooridate.descent;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.Random;
 import java.util.function.Function;
 
 /**
@@ -14,7 +14,7 @@ import java.util.function.Function;
 @Data
 @AllArgsConstructor
 public class CommonCoordinateDescent {
-    private CoordinateDescent.Pair<Double,Double> point;
+    private Pair<Double,Double> point;
 
     @Data
     @AllArgsConstructor
@@ -26,30 +26,30 @@ public class CommonCoordinateDescent {
     }
 
     Function<Quartet,Double> getL;
-    Function<CoordinateDescent.Pair<Double,Double>, Double> f;
+    Function<Pair<Double,Double>, Double> f;
 
     public void make(final double u1, final double u2) {
         {
-            final Quartet quartet = new Quartet(point.getFirst(),point.getSecond(),u1,u2);
+            final Quartet quartet = new Quartet(point.getLeft(),point.getRight(),u1,u2);
             final double h = getL.apply(quartet);
 
             System.out.println("F = " + f.apply(point));
 
-            point.setFirst(point.getFirst() + h*u1);
-            point.setSecond(point.getSecond() + h*u2);
-            System.out.println(String.format("(%s;%s)",point.getFirst(),point.getSecond()));
+            point = Pair.of(point.getLeft() + h*u1,point.getRight() + h*u2);
+
+            System.out.println(String.format("(%s;%s)",point.getLeft(),point.getRight()));
 
             System.out.println("F = " + f.apply(point));
         }
         {
-            final Quartet quartet = new Quartet(point.getFirst(),point.getSecond(),-1/u1,u2);
+            final Quartet quartet = new Quartet(point.getLeft(),point.getRight(),-1/u1,u2);
             final double h = getL.apply(quartet);
 
             System.out.println("F = " + f.apply(point));
 
-            point.setFirst(point.getFirst() + h*u1);
-            point.setSecond(point.getSecond() + h*u2);
-            System.out.println(String.format("(%s;%s)",point.getFirst(),point.getSecond()));
+            point = Pair.of(point.getLeft() + h*u1,point.getRight() + h*u2);
+
+            System.out.println(String.format("(%s;%s)",point.getLeft(),point.getRight()));
 
             System.out.println("F = " + f.apply(point));
         }

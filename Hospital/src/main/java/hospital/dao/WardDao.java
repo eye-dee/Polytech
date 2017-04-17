@@ -12,4 +12,9 @@ public interface WardDao {
     List<Ward> findAll();
 
     List<Ward> findAllWithPeople();
+    Ward findById(long id);
+
+    void deleteById(long id);
+
+    void deleteByDepartureId(long id);
 }

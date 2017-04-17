@@ -18,9 +18,9 @@ import javax.persistence.*;
 @Table(name = "PEOPLE")
 public class People {
     public People() {
-
     }
 
+    private static final long serialVersionUID = 0;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "peopleId")
