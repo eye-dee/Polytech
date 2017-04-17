@@ -1,23 +1,48 @@
 package optimization.cooridate.descent;
 
+import optimization.cooridate.descent.graph.LineDrawer;
+import optimization.cooridate.descent.graph.StripLine;
 import org.apache.commons.lang3.tuple.Pair;
 import statistic.modeling.lab1.SimpleDrawerImprove;
 
+import javax.swing.*;
+import java.awt.*;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static optimization.cooridate.descent.CoefficientPack.SEMEN;
+import static optimization.cooridate.descent.CoefficientPack.*;
 
 /**
  * Polytech
  * Created by igor on 11.04.17.
  */
 public class DescentMain {
+    private static final double SIZE = 10.0;
     public static void main(final String[] args) {
-        final CoefficientPack coefficientPack = SEMEN;
+        final CoefficientPack coefficientPack = IGOR;
         final SimpleDrawerImprove simpleDrawerImprove = new SimpleDrawerImprove("Спуск");
+        final LineDrawer lineDrawer = new LineDrawer();
 
+        final StripLine ox = new StripLine(
+                Arrays.asList(
+                        Pair.of(-SIZE,0.0),
+                        Pair.of(SIZE,0.0)
+                )
+        ),
+                oy = new StripLine(
+                        Arrays.asList(
+                                Pair.of(0.0,-SIZE),
+                                Pair.of(0.0,SIZE)
+                        )
+                );
+
+        ox.setColor(Color.RED);
+        oy.setColor(Color.RED);
+
+        lineDrawer.addLine(ox);
+        lineDrawer.addLine(oy);
         /*Igor*/
         final double a1 = coefficientPack.getA1();
         final double a2 = coefficientPack.getA2();
@@ -56,6 +81,11 @@ public class DescentMain {
 
         pairs = coordinateDescent.getPairs();
 
+        final StripLine first = new StripLine(pairs);
+        first.setColor(Color.BLUE);
+
+        lineDrawer.addLine(first);
+
         simpleDrawerImprove.addChartPanel(
                 pairs.stream().map(Pair::getLeft).collect(Collectors.toList()),
                 pairs.stream().map(Pair::getRight).collect(Collectors.toList())
@@ -74,6 +104,11 @@ public class DescentMain {
         final Pair<Double, Double> idealLineAnswer = rosenbrokDescent.make();
 
         pairs = rosenbrokDescent.getPairs();
+
+        final StripLine second = new StripLine(pairs);
+        second.setColor(Color.GREEN);
+
+        lineDrawer.addLine(second);
 
         simpleDrawerImprove.addChartPanel(
                 pairs.stream().map(Pair::getLeft).collect(Collectors.toList()),
@@ -97,6 +132,16 @@ public class DescentMain {
 
         commonCoordinateDescent.make(idealLineAnswer.getLeft(), idealLineAnswer.getRight());
 
-        simpleDrawerImprove.draw();
+        pairs = commonCoordinateDescent.getPairs();
+
+        final StripLine third = new StripLine(pairs);
+        third.setColor(Color.ORANGE);
+
+        lineDrawer.addLine(third);
+        //simpleDrawerImprove.draw();
+
+        SwingUtilities.invokeLater(() -> {
+            new CGTemplate(lineDrawer); // Let the constructor do the job
+        });
     }
 }

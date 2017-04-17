@@ -33,6 +33,6 @@ public class FirstTry {
         frame.getContentPane()
                 .add(new ChartPanel(chart));
         frame.setSize(400,300);
-        frame.show();
+        frame.setVisible(true);
     }
 }

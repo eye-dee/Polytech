@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 /**
@@ -12,9 +14,17 @@ import java.util.function.Function;
  */
 
 @Data
-@AllArgsConstructor
 public class CommonCoordinateDescent {
     private Pair<Double,Double> point;
+    private List<Pair<Double,Double>> pairs = new ArrayList<>();
+
+    public CommonCoordinateDescent(Pair<Double, Double> point, Function<Quartet, Double> getL, Function<Pair<Double, Double>, Double> f) {
+        this.point = point;
+        this.getL = getL;
+        this.f = f;
+
+        pairs.add(point);
+    }
 
     @Data
     @AllArgsConstructor
@@ -36,6 +46,7 @@ public class CommonCoordinateDescent {
             System.out.println("F = " + f.apply(point));
 
             point = Pair.of(point.getLeft() + h*u1,point.getRight() + h*u2);
+            pairs.add(point);
 
             System.out.println(String.format("(%s;%s)",point.getLeft(),point.getRight()));
 
@@ -48,6 +59,7 @@ public class CommonCoordinateDescent {
             System.out.println("F = " + f.apply(point));
 
             point = Pair.of(point.getLeft() + h*u1,point.getRight() + h*u2);
+            pairs.add(point);
 
             System.out.println(String.format("(%s;%s)",point.getLeft(),point.getRight()));
 

@@ -90,8 +90,6 @@ public class RosenbrokDescent {
 
             pairs.add(curP0);
             pairs.add(curP1);
-            pairs.add(curP2);
-            pairs.add(curP3);
 
             curP0 = Pair.of(curP1.getLeft(),curP1.getRight());
             curP1 = Pair.of(curP3.getLeft(),curP3.getRight());
