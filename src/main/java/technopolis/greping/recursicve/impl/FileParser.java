@@ -1,13 +1,12 @@
 package technopolis.greping.recursicve.impl;
 
-import org.apache.commons.io.FileUtils;
 import technopolis.greping.recursicve.ResultObject;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -29,13 +28,15 @@ public class FileParser {
 
     public void parse(final Path path) throws IOException {
         final String fileName = path.toString();
-        final List<String> lines = FileUtils.readLines(new File(path.toUri()));
+//        final List<String> lines = FileUtils.readLines(new File(path.toUri()));
 
-        final Iterator<String> iterator = lines.iterator();
+        final File file = new File(path.toUri());
+        final BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+
         long stringNumber = 0;
-        while (iterator.hasNext()) {
-            final String line = iterator.next();
 
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
             if (line.contains(searchPhrase)) {
                 resultObjects.add(new ResultObject(stringNumber,fileName));
             }
