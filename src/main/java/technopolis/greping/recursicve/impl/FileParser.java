@@ -31,16 +31,17 @@ public class FileParser {
 //        final List<String> lines = FileUtils.readLines(new File(path.toUri()));
 
         final File file = new File(path.toUri());
-        final BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        try (final BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
 
-        long stringNumber = 0;
+            long stringNumber = 0;
 
-        String line;
-        while ((line = bufferedReader.readLine()) != null) {
-            if (line.contains(searchPhrase)) {
-                resultObjects.add(new ResultObject(stringNumber,fileName));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                if (line.contains(searchPhrase)) {
+                    resultObjects.add(new ResultObject(stringNumber, fileName));
+                }
+                ++stringNumber;
             }
-            ++stringNumber;
         }
     }
 }
