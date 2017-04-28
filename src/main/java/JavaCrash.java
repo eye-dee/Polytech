@@ -10,6 +10,6 @@ public class JavaCrash {
     public static void main(final String[] args) {
         final List[] arr = new List[100];
 
-        Arrays.setAll(arr,ArrayList::new);
+        Arrays.setAll(arr,i -> new ArrayList());
     }
 }

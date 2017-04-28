@@ -23,7 +23,7 @@ public class SimpleRandomSequenceGenerator implements RandomSequenceGenerator {
     }
 
     public SimpleRandomSequenceGenerator(final DistributionGenerator distributionGenerator){
-        N = 1000;
+        N = 10000;
         sequence = new ArrayList<>(N);
         this.distributionGenerator = distributionGenerator;
     }

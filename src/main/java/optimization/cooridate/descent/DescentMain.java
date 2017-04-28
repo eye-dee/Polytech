@@ -5,14 +5,13 @@ import optimization.cooridate.descent.graph.StripLine;
 import org.apache.commons.lang3.tuple.Pair;
 import statistic.modeling.lab1.SimpleDrawerImprove;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static optimization.cooridate.descent.CoefficientPack.*;
+import static optimization.cooridate.descent.CoefficientPack.SEMEN;
 
 /**
  * Polytech
@@ -21,7 +20,7 @@ import static optimization.cooridate.descent.CoefficientPack.*;
 public class DescentMain {
     private static final double SIZE = 10.0;
     public static void main(final String[] args) {
-        final CoefficientPack coefficientPack = IGOR;
+        final CoefficientPack coefficientPack = SEMEN;
         final SimpleDrawerImprove simpleDrawerImprove = new SimpleDrawerImprove("Спуск");
         final LineDrawer lineDrawer = new LineDrawer();
 
@@ -140,8 +139,8 @@ public class DescentMain {
         lineDrawer.addLine(third);
         //simpleDrawerImprove.draw();
 
-        SwingUtilities.invokeLater(() -> {
+        /*SwingUtilities.invokeLater(() -> {
             new CGTemplate(lineDrawer); // Let the constructor do the job
-        });
+        });*/
     }
 }

@@ -2,8 +2,8 @@ package statistic.modeling.lab2;
 
 import statistic.modeling.lab1.SimpleDrawer;
 import statistic.modeling.lab2.check.PirsonChecker;
-import statistic.modeling.lab2.distribution.GeometricalDistributionGenerator;
-import statistic.modeling.lab2.sequence.SimpleRandomSequenceGeneratorWithDensityParam;
+import statistic.modeling.lab2.distribution.GeometricalDistributionGenerator3;
+import statistic.modeling.lab2.sequence.SimpleRandomSequenceGenerator;
 import statistic.modeling.lab3.dto.DistributionToDensity;
 
 import java.util.ArrayList;
@@ -17,31 +17,29 @@ public class Lab2DopGenerator {
 
     public static void main(final String[] args) {
         final int N = 100;
-        final RandomSequenceGenerator randomSequenceGenerator = new SimpleRandomSequenceGeneratorWithDensityParam(
-            new GeometricalDistributionGenerator(0.5),1,-1,N);
+        final RandomSequenceGenerator randomSequenceGenerator = new SimpleRandomSequenceGenerator(
+            new GeometricalDistributionGenerator3(0.5),1000000);
         randomSequenceGenerator.generate();
         randomSequenceGenerator.showSequence();
 
-        final List<Double> tempRealDistributionFunction = new ArrayList<>();
+        final List<Double> realDistributionFunction = new ArrayList<>();
         final List<Double> distributionFunction = DistributionToDensity.build(randomSequenceGenerator.getSequence());
 
         final double q = 0.5;
         double sumQ = 1.0;
         final double p = 1-q;
         for (int i = 0; i < distributionFunction.size(); ++i) {
-            tempRealDistributionFunction.add(sumQ*p);
+            realDistributionFunction.add(sumQ*p);
             sumQ *= q;
         }
 
-        final List<Double> realDistributionFunction = DistributionToDensity.build(tempRealDistributionFunction);
-
-        final SimpleDrawer simpleDrawer = new SimpleDrawer("Sdasd");
+        final SimpleDrawer simpleDrawer = new SimpleDrawer("Должно получится");
         simpleDrawer.setY(realDistributionFunction);
         simpleDrawer.createDefaultX();
 
         simpleDrawer.draw();
 
-        final SimpleDrawer simpleDrawer2 = new SimpleDrawer("Sdasd");
+        final SimpleDrawer simpleDrawer2 = new SimpleDrawer("Получается");
         simpleDrawer2.setY(distributionFunction);
         simpleDrawer2.createDefaultX();
 

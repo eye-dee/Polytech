@@ -10,7 +10,7 @@ import java.util.List;
 public class DistributionToDensity {
 
     public static List<Integer> buildWithoutDividing(final List<Double> sequence) {
-        final int DIVIDE_N = 20;
+        final int DIVIDE_N = 15;
 
         final List<Integer> density = new ArrayList<>(DIVIDE_N);
 

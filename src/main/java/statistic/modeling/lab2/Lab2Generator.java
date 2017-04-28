@@ -1,9 +1,9 @@
 package statistic.modeling.lab2;
 
 import statistic.modeling.lab1.SimpleDrawer;
-import statistic.modeling.lab2.distribution.*;
+import statistic.modeling.lab2.distribution.DirectGeometricalDistribution;
+import statistic.modeling.lab2.distribution.GeometricalDistributionGenerator3;
 import statistic.modeling.lab2.sequence.SimpleRandomSequenceGenerator;
-import statistic.modeling.lab2.sequence.SimpleRandomSequenceGeneratorWithDensityParam;
 import statistic.modeling.lab3.dto.DistributionToDensity;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class Lab2Generator {
         final List<RandomSequenceGenerator> distributionGenerators = new ArrayList<>();
         final List<String> names = new ArrayList<>();
 
-        distributionGenerators.add( new SimpleRandomSequenceGenerator(
+        /*distributionGenerators.add( new SimpleRandomSequenceGenerator(
                 new UniformDistributionGenerator(1.0,100.0)));
         names.add("Uniform");
         distributionGenerators.add( new SimpleRandomSequenceGeneratorWithDensityParam(
@@ -34,16 +34,20 @@ public class Lab2Generator {
         names.add("Poisson");
         distributionGenerators.add( new SimpleRandomSequenceGeneratorWithDensityParam(
                 new LogarithmicDistributionGenerator(0.5),1,-1));
-        names.add("Logarithmic");
+        names.add("Logarithmic");*/
 
-        distributionGenerators.add( new SimpleRandomSequenceGeneratorWithDensityParam(
-                new DirectGeometricalDistribution(0.5),1,-1));
+        distributionGenerators.add( new SimpleRandomSequenceGenerator(
+                new DirectGeometricalDistribution(0.5)));
+        names.add("DirectGeometrical");
+
+        distributionGenerators.add( new SimpleRandomSequenceGenerator(
+                new GeometricalDistributionGenerator3(0.5)));
         names.add("DirectGeometrical");
 
         final List<SimpleDrawer> drawers = new ArrayList<>();
 
         final Iterator<String> iterator = names.iterator();
-        distributionGenerators.stream().forEach(
+        distributionGenerators.forEach(
                 randomSequenceGenerator -> {
                     randomSequenceGenerator.generate();
                     randomSequenceGenerator.showSequence();
@@ -63,6 +67,6 @@ public class Lab2Generator {
                 }
         );
 
-        drawers.forEach(SimpleDrawer::draw);
+        //drawers.forEach(SimpleDrawer::draw);
     }
 }

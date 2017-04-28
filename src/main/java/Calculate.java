@@ -34,5 +34,10 @@ public class Calculate {
         System.out.println(-(a2*y+b1)/2/a1);
         System.out.println(-(a2*x+b2)/2/a3);
         System.out.println(a1*x*x + a2*x*y + a3*y*y + b1*x + b2*y);
+
+        System.out.println((Math.sqrt(6818641)-1580)/2079);
+        System.out.println((-Math.sqrt(6818641)-1580)/2079);
+        System.out.println((-Math.sqrt(6818641)+2529)/10);
+        System.out.println((Math.sqrt(6818641)+2529)/10);
     }
 }
