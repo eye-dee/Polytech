@@ -17,13 +17,18 @@ import java.util.Set;
 @Configuration
 public class MainRecursiveGrepConfig {
     @Bean
+    public Set<String> fileSet() {
+        return new HashSet<>();
+    }
+
+    @Bean
     public Set<ResultObject> resultObjects() {
         return new HashSet<>();
     }
 
     @Bean
     public FileToLineParser fileToLineParser() {
-        return new FileToLineParserImpl(fileParser());
+        return new FileToLineParserImpl(fileParser(),fileSet());
     }
 
     @Bean

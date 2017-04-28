@@ -7,6 +7,7 @@ import technopolis.greping.recursicve.interfaces.FileToLineParser;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Set;
 
 /**
  * Polytech
@@ -16,11 +17,12 @@ import java.nio.file.Path;
 @AllArgsConstructor
 public class FileToLineParserImpl implements FileToLineParser {
     private final FileParser fileParser;
+    private final Set<String> fileSet;
 
     @Override
     public void directoryDetected(final Path path) {
         try {
-            Files.walkFileTree(path,new SimpleGrepFileVisitor(fileParser));
+            Files.walkFileTree(path,new SimpleGrepFileVisitor(fileParser,fileSet));
         } catch (final IOException e) {
             System.out.println(e.getMessage());
         }
@@ -29,7 +31,11 @@ public class FileToLineParserImpl implements FileToLineParser {
     @Override
     public void fileDetected(final Path path) {
         try {
-            fileParser.parse(path);
+            final String fileName = path.toString();
+            if (!fileSet.contains(fileName)) {
+                fileParser.parse(path);
+                fileSet.add(fileName);
+            }
         } catch (final IOException e) {
             System.out.println(e.getMessage());
         }

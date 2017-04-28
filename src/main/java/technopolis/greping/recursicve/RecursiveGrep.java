@@ -4,7 +4,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import technopolis.greping.recursicve.impl.FileParser;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Set;
 
 /**
@@ -13,7 +14,6 @@ import java.util.Set;
  */
 public class RecursiveGrep {
     public static void main(final String[] args) {
-
         if (args.length != 3) {
             throw new IllegalArgumentException("Неверное количество аргументов");
         }
@@ -32,6 +32,8 @@ public class RecursiveGrep {
             final Set resultObjects = applicationContext.getBean("resultObjects", Set.class);
             resultObjects.forEach(printWriter::println);
 
+            final Set fileSet = applicationContext.getBean("fileSet",Set.class);
+            fileSet.forEach(System.out::println);
         } catch (final FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
