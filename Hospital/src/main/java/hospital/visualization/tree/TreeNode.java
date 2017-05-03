@@ -1,4 +1,4 @@
-package hospital.visualization;
+package hospital.visualization.tree;
 
 import java.util.ArrayList;
 import java.util.List;

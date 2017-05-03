@@ -1,17 +1,11 @@
 package hospital;
 
-import hospital.dao.DepartureDao;
-import hospital.dao.DiagnosisDao;
-import hospital.impl.DepartureDaoImpl;
-import hospital.impl.DiagnosisDaoImpl;
-import hospital.impl.PeopleDaoImpl;
-import hospital.types.Departure;
-import hospital.types.Diagnosis;
-import hospital.types.People;
-import hospital.types.Ward;
-import hospital.dao.PeopleDao;
-import hospital.dao.WardDao;
-import hospital.impl.WardDaoImpl;
+import hospital.dao.*;
+import hospital.impl.*;
+import hospital.types.*;
+import hospital.visualization.login.LoginWindow;
+import hospital.visualization.tabs.MainWindow;
+import hospital.visualization.tree.TreeRepresentation;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,7 +19,7 @@ import java.util.Locale;
  */
 
 @Configuration
-@ComponentScan(basePackages = "oracle.hospital.*")
+@ComponentScan(basePackages = "hospital.*")
 public class ApplicationConfig {
     @Bean
     public org.hibernate.cfg.Configuration configuration() {
@@ -69,5 +63,30 @@ public class ApplicationConfig {
     @Bean
     WardDao wardDao() {
         return new WardDaoImpl(sessionFactory(),peopleDao());
+    }
+
+    @Bean
+    UserDao userDao() {
+        return new UserDaoImpl(sessionFactory());
+    }
+
+    @Bean
+    TreeRepresentation treeRepresentation() {
+        return new TreeRepresentation(departureDao(),sessionFactory());
+    }
+
+    @Bean
+    MainWindow mainWindow() {
+        return new MainWindow(treeRepresentation(),loginWindow());
+    }
+
+    @Bean
+    LoginWindow loginWindow() {
+        return new LoginWindow(userDao(),currentUser());
+    }
+
+    @Bean
+    User currentUser() {
+        return User.builder().build();
     }
 }

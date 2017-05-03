@@ -16,11 +16,8 @@ import javax.persistence.*;
 @Entity
 @Builder
 @Table(name = "PEOPLE")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class People {
-    public People() {
-    }
-
-    private static final long serialVersionUID = 0;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "peopleId")

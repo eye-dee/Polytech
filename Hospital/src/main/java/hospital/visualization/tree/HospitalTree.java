@@ -1,4 +1,4 @@
-package hospital.visualization;
+package hospital.visualization.tree;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellRenderer;

@@ -29,7 +29,6 @@ public class PeopleDaoImpl implements PeopleDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartureDaoImpl.class);
 
-
     @Override
     public List<People> findAll() {
         try(Session session = sessionFactory.openSession()) {

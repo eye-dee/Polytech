@@ -1,15 +1,11 @@
 package hospital;
 
-import hospital.dao.DepartureDao;
-import hospital.dao.DiagnosisDao;
-import hospital.dao.PeopleDao;
+import hospital.dao.*;
 import hospital.types.Departure;
 import hospital.types.Diagnosis;
 import hospital.types.People;
 import hospital.types.Ward;
-import hospital.dao.WardDao;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import hospital.visualization.tabs.MainWindow;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -28,6 +24,9 @@ public class Application {
         final WardDao wardDao = applicationContext.getBean("wardDao", WardDao.class);
         final DiagnosisDao diagnosisDao = applicationContext.getBean("diagnosisDao", DiagnosisDao.class);
         final DepartureDao departureDao = applicationContext.getBean("departureDao", DepartureDao.class);
+        final UserDao userDao = applicationContext.getBean("userDao",UserDao.class);
+
+        System.out.println(userDao.findByLogin("igor"));
 
         final List<People> peoples = peopleDao.findAll();
         System.out.println("People List:");
@@ -54,12 +53,17 @@ public class Application {
 
        // wardDao.deleteById(1);
 
-        departureDao.deleteDeparture(1);
+//        departureDao.deleteDeparture(1);
 
         /*peopleDao.insert(new People(0,"firtName","lastName","fatherName",1,1));
         System.out.println("inserted");*/
 
-        final SessionFactory sessionFactory = (SessionFactory)applicationContext.getBean("sessionFactory");
-        StandardServiceRegistryBuilder.destroy(sessionFactory.getSessionFactoryOptions().getServiceRegistry());
+        javax.swing.SwingUtilities.invokeLater(
+                () ->
+                        MainWindow.createAndShowGUI(applicationContext.getBean("mainWindow",MainWindow.class))
+        );
+
+        /*final SessionFactory sessionFactory = (SessionFactory)applicationContext.getBean("sessionFactory");
+        StandardServiceRegistryBuilder.destroy(sessionFactory.getSessionFactoryOptions().getServiceRegistry());*/
     }
 }

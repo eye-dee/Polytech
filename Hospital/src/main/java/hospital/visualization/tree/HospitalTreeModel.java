@@ -1,4 +1,4 @@
-package hospital.visualization;
+package hospital.visualization.tree;
 
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
