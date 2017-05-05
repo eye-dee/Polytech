@@ -6,6 +6,7 @@ import hospital.types.User;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.util.Arrays;
 
 /**
  * Polytech
@@ -20,8 +21,10 @@ public class LoginWindow extends JPanel {
     private final UserDao userDao;
     private final User currentUser;
 
+    private JTabbedPane jTabbedPane;
+
     public LoginWindow(final UserDao userDao, final User currentUser) {
-        super(new GridLayout(3,0));
+        super(new GridLayout(3, 0));
 
         this.userDao = userDao;
         this.currentUser = currentUser;
@@ -37,15 +40,54 @@ public class LoginWindow extends JPanel {
         add(confirm);
 
         confirm.addActionListener(e -> {
-            final User user = userDao.findByLogin(login.getText());
+            final User user = this.userDao.findByLogin(login.getText());
 
             if (user.getLogin() == null) {
-                System.out.println("No user");
+                JOptionPane.showMessageDialog(this,
+                        "Incorrect User",
+                        "Inane error",
+                        JOptionPane.ERROR_MESSAGE);
+                setEnabled(false);
             } else {
-                currentUser.setLogin(user.getLogin());
-                currentUser.setPassword(user.getPassword());
-                System.out.println("Loggined");
+                if (Arrays.equals(
+                        password.getPassword(),
+                        user.getPassword().toCharArray())) {
+                    currentUser.setLogin(user.getLogin());
+                    currentUser.setPassword(user.getPassword());
+                    JOptionPane.showMessageDialog(this,
+                            "Success",
+                            "Inane error",
+                            JOptionPane.INFORMATION_MESSAGE);
+
+                    setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog(this,
+                            "Incorrect Password",
+                            "Inane error",
+                            JOptionPane.ERROR_MESSAGE);
+                    setEnabled(false);
+                }
             }
         });
+    }
+
+    public void setjTabbedPane(final JTabbedPane jTabbedPane) {
+        this.jTabbedPane = jTabbedPane;
+
+        jTabbedPane.addChangeListener(
+                e -> {
+                    final int index = jTabbedPane.getSelectedIndex();
+                    if (index == 0) {
+                        setEnabled(false);
+                    }
+                }
+        );
+    }
+
+    public void setEnabled(final boolean flag) {
+        final int size = jTabbedPane.getComponents().length;
+        for (int i = 1; i < size; ++i) {
+            jTabbedPane.setEnabledAt(i, flag);
+        }
     }
 }

@@ -60,7 +60,7 @@ public class Lab1Generator {
 
             final ChiSquareCriteria chiSquareCriteria = new ChiSquareCriteria(interval, 0, 1, 1);
 
-            System.out.println("chiSquareCriteria : " + chiSquareCriteria.getChiSquareResult());
+            System.out.println("chiSquareCriteria : " + chiSquareCriteria.getChiSquareResult(t));
         }
     }
 }

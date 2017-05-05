@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Entity
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "UsersTable")
+@Table(name = "USERSTABLE")
 public class User {
     @Id
     @Column(name = "login")

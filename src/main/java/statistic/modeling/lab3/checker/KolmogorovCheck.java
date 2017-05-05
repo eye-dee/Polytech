@@ -17,13 +17,13 @@ public class KolmogorovCheck implements DistributionChecker {
     private double maxD;
 
     public void check() {
-        final List<Double> Dnm= new ArrayList<>(distributionFunc.size());
-        final List<Double> Dnp= new ArrayList<>(distributionFunc.size());
+        final List<Double> Dnm = new ArrayList<>(distributionFunc.size());
+        final List<Double> Dnp = new ArrayList<>(distributionFunc.size());
 
         final int N = distributionFunc.size();
         for (int i = 0; i < N; ++i) {
-            Dnm.add( (double)i/N - distributionFunc.get(i));
-            Dnp.add( distributionFunc.get(i) - (double)(i-1)/N);
+            Dnm.add((double) i / N - distributionFunc.get(i));
+            Dnp.add(distributionFunc.get(i) - (double) (i - 1) / N);
         }
 
         final double maxDnm = getMaxFromList(Dnm);
@@ -43,7 +43,7 @@ public class KolmogorovCheck implements DistributionChecker {
     }
 
     public double getStatistic() {
-        return maxD*Math.sqrt(distributionFunc.size());
-        //return (6*distributionFunc.size()*maxD+1)/(6* Math.sqrt(distributionFunc.size()));
+        // return maxD*Math.sqrt(distributionFunc.size());
+        return (6 * distributionFunc.size() * maxD + 1) / (6 * Math.sqrt(distributionFunc.size()));
     }
 }

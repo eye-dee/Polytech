@@ -31,8 +31,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findByLogin(final String login) {
         try (Session session = sessionFactory.openSession()) {
-
-            final Query query = session.createQuery("from UsersTable where login = :login");
+            final Query query = session.createQuery("from User where login = :login");
             query.setParameter("login",login);
 
             final List list = query.list();

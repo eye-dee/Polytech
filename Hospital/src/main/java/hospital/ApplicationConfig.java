@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import javax.swing.*;
 import java.util.Locale;
 
 /**
@@ -35,6 +36,7 @@ public class ApplicationConfig {
         configuration.addAnnotatedClass(Diagnosis.class);
         configuration.addAnnotatedClass(Ward.class);
         configuration.addAnnotatedClass(Departure.class);
+        configuration.addAnnotatedClass(User.class);
 
         return configuration.buildSessionFactory();
     }
@@ -47,12 +49,12 @@ public class ApplicationConfig {
 
     @Bean
     PeopleDao peopleDao() {
-        return new PeopleDaoImpl(sessionFactory(),diagnosisDao());
+        return new PeopleDaoImpl(sessionFactory(), diagnosisDao());
     }
 
     @Bean
     DepartureDao departureDao() {
-        return new DepartureDaoImpl(sessionFactory(),wardDao(),diagnosisDao());
+        return new DepartureDaoImpl(sessionFactory(), wardDao(), diagnosisDao());
     }
 
     @Bean
@@ -62,7 +64,7 @@ public class ApplicationConfig {
 
     @Bean
     WardDao wardDao() {
-        return new WardDaoImpl(sessionFactory(),peopleDao());
+        return new WardDaoImpl(sessionFactory(), peopleDao());
     }
 
     @Bean
@@ -72,21 +74,40 @@ public class ApplicationConfig {
 
     @Bean
     TreeRepresentation treeRepresentation() {
-        return new TreeRepresentation(departureDao(),sessionFactory());
+        return new TreeRepresentation(departureDao(), sessionFactory());
     }
 
     @Bean
     MainWindow mainWindow() {
-        return new MainWindow(treeRepresentation(),loginWindow());
+        return new MainWindow(treeRepresentation(), loginWindow(), tabbedPane());
     }
 
     @Bean
     LoginWindow loginWindow() {
-        return new LoginWindow(userDao(),currentUser());
+        return new LoginWindow(userDao(), currentUser());
     }
 
     @Bean
     User currentUser() {
         return User.builder().build();
+    }
+
+    @Bean
+    JTabbedPane tabbedPane() {
+        final JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.addTab("Логин", null, loginWindow(), null);
+        tabbedPane.addTab("Дерево Больницы", null, treeRepresentation(), null);
+        tabbedPane.addTab("Titled", null, null, null);
+        tabbedPane.addTab("Compound", null, null, null);
+        tabbedPane.setSelectedIndex(0);
+        final String toolTip = "<html>Blue Wavy Line border art crew:<br>&nbsp;&nbsp;&nbsp;Bill Pauley<br>&nbsp;&nbsp;&nbsp;Cris St. Aubyn<br>&nbsp;&nbsp;&nbsp;Ben Wronsky<br>&nbsp;&nbsp;&nbsp;Nathan Walrath<br>&nbsp;&nbsp;&nbsp;Tommy Adams, special consultant</html>";
+        tabbedPane.setToolTipTextAt(1, toolTip);
+
+        final int size = tabbedPane.getComponents().length;
+        for (int i = 1; i < size; ++i) {
+            tabbedPane.setEnabledAt(i, false);
+        }
+
+        return tabbedPane;
     }
 }

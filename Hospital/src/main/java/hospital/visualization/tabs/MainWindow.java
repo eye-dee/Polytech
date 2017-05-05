@@ -11,20 +11,17 @@ import java.awt.*;
  * Created by igor on 03.05.17.
  */
 public class MainWindow extends JPanel {
+    private final JTabbedPane tabbedPane;
+
     public MainWindow(
             final TreeRepresentation treeRepresentation,
-            final LoginWindow loginWindow
+            final LoginWindow loginWindow,
+            final JTabbedPane tabbedPane
     ) {
         super(new GridLayout(1, 0));
 
-        final JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("Логин", null, loginWindow, null);
-        tabbedPane.addTab("Дерево Больницы", null, treeRepresentation, null);
-        tabbedPane.addTab("Titled", null, null, null);
-        tabbedPane.addTab("Compound", null, null, null);
-        tabbedPane.setSelectedIndex(0);
-        final String toolTip = "<html>Blue Wavy Line border art crew:<br>&nbsp;&nbsp;&nbsp;Bill Pauley<br>&nbsp;&nbsp;&nbsp;Cris St. Aubyn<br>&nbsp;&nbsp;&nbsp;Ben Wronsky<br>&nbsp;&nbsp;&nbsp;Nathan Walrath<br>&nbsp;&nbsp;&nbsp;Tommy Adams, special consultant</html>";
-        tabbedPane.setToolTipTextAt(1, toolTip);
+        this.tabbedPane = tabbedPane;
+        loginWindow.setjTabbedPane(tabbedPane);
 
         add(tabbedPane);
     }

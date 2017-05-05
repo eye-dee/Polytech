@@ -28,6 +28,7 @@ public class Lab2DopGenerator {
         final double q = 0.5;
         double sumQ = 1.0;
         final double p = 1-q;
+        System.out.println(distributionFunction.size());
         for (int i = 0; i < distributionFunction.size(); ++i) {
             realDistributionFunction.add(sumQ*p);
             sumQ *= q;
