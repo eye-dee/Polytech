@@ -2,7 +2,6 @@ package hospital.impl;
 
 import hospital.dao.DiagnosisDao;
 import hospital.types.Diagnosis;
-import hospital.types.Ward;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -30,6 +29,25 @@ public class DiagnosisDaoImpl implements DiagnosisDao {
 
             return session.createQuery("from Diagnosis").list();
         }
+    }
+
+    @Override
+    public Long findByName(final String name) {
+        try(Session session = sessionFactory.openSession()) {
+            final Query query = session.createQuery("from Diagnosis where diagnosisName = :name");
+            query.setParameter("name", name);
+            return ((Diagnosis) query.list().get(0)).getDiagnosisId();
+        }
+    }
+
+    @Override
+    public Diagnosis insert(final Diagnosis diagnosis) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.save(diagnosis);
+            session.getTransaction().commit();
+        }
+        return diagnosis;
     }
 
     @Override

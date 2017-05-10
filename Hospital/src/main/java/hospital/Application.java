@@ -1,6 +1,7 @@
 package hospital;
 
 import hospital.dao.*;
+import hospital.init.Import;
 import hospital.types.Departure;
 import hospital.types.Diagnosis;
 import hospital.types.People;
@@ -19,6 +20,9 @@ import java.util.List;
 public class Application {
     public static void main(final String[] args) {
         final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+
+        final Import anImport = applicationContext.getBean("anImport",Import.class);
+        anImport.init();
 
         final PeopleDao peopleDao = applicationContext.getBean("peopleDao", PeopleDao.class);
         final WardDao wardDao = applicationContext.getBean("wardDao", WardDao.class);

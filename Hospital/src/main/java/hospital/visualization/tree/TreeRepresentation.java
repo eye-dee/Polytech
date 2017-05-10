@@ -17,11 +17,23 @@ import java.util.List;
 
 public class TreeRepresentation extends JPanel {
     private static final int WIDTH = 1024;
-    private static final int HEIGHT = 800;
+    private static final int HEIGHT = 600;
 
     private final DepartureDao departureDao;
     private final SessionFactory sessionFactory;
-    private final HospitalTree tree;
+    private HospitalTree tree;
+    private JScrollPane jScrollPane;
+
+    public void setjTabbedPane(final JTabbedPane jTabbedPane) {
+        jTabbedPane.addChangeListener(
+                e -> {
+                    final int index = jTabbedPane.getSelectedIndex();
+                    if (index == 1) {
+                        update();
+                    }
+                }
+        );
+    }
 
     public TreeRepresentation(
             final DepartureDao departureDao,
@@ -34,24 +46,24 @@ public class TreeRepresentation extends JPanel {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         final List<Departure> departures = departureDao.findAllWithWards();
-        //StandardServiceRegistryBuilder.destroy(sessionFactory.getSessionFactoryOptions().getServiceRegistry());
 
         tree = new HospitalTree(createTreeFromDepartures(departures));
-        final JScrollPane scrollPane = new JScrollPane(tree);
-        scrollPane.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        jScrollPane = new JScrollPane(tree);
+        jScrollPane.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
-        add(scrollPane, BorderLayout.CENTER);
-
-        /*this.setOpaque(true);
-        frame.setContentPane(this);
-
-        frame.pack();
-        frame.setVisible(true);*/
+        add(jScrollPane, BorderLayout.CENTER);
     }
 
-    /*public static void main() {
-        javax.swing.SwingUtilities.invokeLater(() -> createAndShowGUI);
-    }*/
+    public void update() {
+        remove(jScrollPane);
+        final List<Departure> departures = departureDao.findAllWithWards();
+        tree = new HospitalTree(createTreeFromDepartures(departures));
+        jScrollPane = new JScrollPane(tree);
+
+        add(jScrollPane, BorderLayout.CENTER);
+
+        updateUI();
+    }
 
     private static TreeNode createTreeFromDepartures(final List<Departure> departures) {
         final TreeNode root = new TreeNode("Hospital");

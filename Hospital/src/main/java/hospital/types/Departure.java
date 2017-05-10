@@ -1,7 +1,6 @@
 package hospital.types;
 
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,11 +15,15 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "DEPARTURES")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Departure {
     private static final long serialVersionUID = 0;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "DepartureIdSequence")
+    @SequenceGenerator(name="DepartureIdSequence", sequenceName="DepartureIdSequence")
     @Column(name = "departureId")
     private Long departureId;
 

@@ -1,5 +1,6 @@
 package hospital.visualization.tabs;
 
+import hospital.visualization.list.WriteOutPeople;
 import hospital.visualization.login.LoginWindow;
 import hospital.visualization.tree.TreeRepresentation;
 
@@ -12,16 +13,21 @@ import java.awt.*;
  */
 public class MainWindow extends JPanel {
     private final JTabbedPane tabbedPane;
+    private final WriteOutPeople writeOutPeople;
 
     public MainWindow(
             final TreeRepresentation treeRepresentation,
             final LoginWindow loginWindow,
-            final JTabbedPane tabbedPane
-    ) {
+            final JTabbedPane tabbedPane,
+            final WriteOutPeople writeOutPeople) {
         super(new GridLayout(1, 0));
 
         this.tabbedPane = tabbedPane;
+        this.writeOutPeople = writeOutPeople;
+
+        writeOutPeople.setjTabbedPane(tabbedPane);
         loginWindow.setjTabbedPane(tabbedPane);
+        treeRepresentation.setjTabbedPane(tabbedPane);
 
         add(tabbedPane);
     }
@@ -36,8 +42,4 @@ public class MainWindow extends JPanel {
         frame.pack();
         frame.setVisible(true);
     }
-
-    /*public static void main(final String[] args) {
-        javax.swing.SwingUtilities.invokeLater(MainWindow::createAndShowGUI);
-    }*/
 }

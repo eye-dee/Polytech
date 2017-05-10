@@ -8,6 +8,7 @@ import hospital.dao.DepartureDao;
 import hospital.dao.WardDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,5 +66,26 @@ public class DepartureDaoImpl implements DepartureDao {
                 LOGGER.error("No Ward with id {}", id);
             }
         }
+    }
+
+    @Override
+    public Long findByName(final String name) {
+        try (Session session = sessionFactory.openSession()) {
+            final Query query = session.createQuery("from Departure where departureName = :name");
+            query.setParameter("name",name);
+
+            return ((Departure)query.list().get(0)).getDepartureId();
+        }
+    }
+
+    @Override
+    public Departure insert(final Departure departure) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.save(departure);
+            session.getTransaction().commit();
+        }
+
+        return departure;
     }
 }

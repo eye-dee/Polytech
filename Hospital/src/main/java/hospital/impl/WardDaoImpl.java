@@ -1,17 +1,19 @@
 package hospital.impl;
 
 import hospital.dao.PeopleDao;
+import hospital.dao.WardDao;
 import hospital.types.People;
 import hospital.types.Ward;
 import lombok.AllArgsConstructor;
-import hospital.dao.WardDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -34,6 +36,16 @@ public class WardDaoImpl implements WardDao {
     }
 
     @Override
+    public Long findByName(final String name) {
+        try(Session session = sessionFactory.openSession()) {
+            final Query query = session.createQuery("from Ward where wardName = :name");
+            query.setParameter("name",name);
+
+            return ((Ward) query.list().get(0)).getWardId();
+        }
+    }
+
+    @Override
     public List<Ward> findAllWithPeople() {
         try (Session session = sessionFactory.openSession()) {
             final List<Ward> wards = session.createQuery("from Ward").list();
@@ -46,6 +58,17 @@ public class WardDaoImpl implements WardDao {
 
             return wards;
         }
+    }
+
+    @Override
+    public Ward insert(final Ward ward) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.save(ward);
+            session.getTransaction().commit();
+        }
+
+        return ward;
     }
 
     @Override

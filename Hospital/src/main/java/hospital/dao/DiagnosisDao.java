@@ -12,4 +12,8 @@ public interface DiagnosisDao {
     List<Diagnosis> findAll();
 
     void deleteByDepartureId(long id);
+
+    Long findByName(String name);
+
+    Diagnosis insert(Diagnosis diagnosis);
 }

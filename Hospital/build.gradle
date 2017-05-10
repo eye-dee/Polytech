@@ -39,10 +39,6 @@ dependencies {
 
     //asertJ unit tests
     compile group: 'org.assertj', name: 'assertj-core', version: '3.6.2'
-
-    // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
-    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'
-
     //apache commons
     compile group: 'org.apache.commons', name: 'commons-math3', version: '3.0'
     //basic DataSource

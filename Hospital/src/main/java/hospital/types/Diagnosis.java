@@ -1,7 +1,6 @@
 package hospital.types;
 
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -14,10 +13,14 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "DIAGNOSIS")
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Diagnosis {
     private static final long serialVersionUID = 0;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "DiagnosisIdSequence")
+    @SequenceGenerator(name="DiagnosisIdSequence", sequenceName="DiagnosisIdSequence")
     @Column(name = "diagnosisId")
     private Long diagnosisId;
 

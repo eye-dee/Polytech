@@ -17,4 +17,8 @@ public interface WardDao {
     void deleteById(long id);
 
     void deleteByDepartureId(long id);
+
+    Long findByName(String name);
+
+    Ward insert(Ward ward);
 }

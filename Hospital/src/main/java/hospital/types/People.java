@@ -18,8 +18,10 @@ import javax.persistence.*;
 @Table(name = "PEOPLE")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class People {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PEOPLEIDSEQUENCE")
+    @SequenceGenerator(name="PEOPLEIDSEQUENCE", sequenceName="PEOPLEIDSEQUENCE")
     @Column(name = "peopleId")
     private Long peopleId;
 
@@ -37,5 +39,4 @@ public class People {
 
     @Transient
     private Diagnosis diagnosis;
-
 }
