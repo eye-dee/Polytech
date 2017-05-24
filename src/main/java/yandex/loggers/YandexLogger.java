@@ -1,13 +1,15 @@
 package yandex.loggers;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+
+import static yandex.HttpUtil.*;
 
 /**
  * Polytech
@@ -16,9 +18,6 @@ import java.util.stream.Collectors;
 public class YandexLogger {
     private static final String TOKEN = "AQAAAAAUQvf-AAQfH-ET9xpCKUwIr4MDS8a21lY";
     private static final String COUNTER_ID = "34322390";
-
-    private static final String GET = "GET";
-    private static final String POST = "POST";
 
     //must be POST
     private static final String CREATE_LOGGER_TEMPLATE = "https://api-metrika.yandex.ru/management/v1/counter/%s/logrequests?" +
@@ -261,36 +260,6 @@ public class YandexLogger {
 
     public int getDivide() {
         return possibleVisits.size();
-    }
-
-    private String executeRequest(final String url,final String method) {
-        try {
-            final URL obj = new URL(url);
-            final HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-            con.setRequestMethod(method);
-
-            final int responseCode = con.getResponseCode();
-            System.out.println("\nSending '" + POST + "' request to URL : " + url);
-            System.out.println("Response Code : " + responseCode);
-
-            final BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            final StringBuffer response = new StringBuffer();
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-                response.append('\t');
-            }
-            in.close();
-
-            System.out.println(response.toString());
-            return response.toString();
-        } catch (final IOException exception) {
-            System.out.println(exception.getMessage());
-        }
-        return "";
     }
 
     public void createLogger() {

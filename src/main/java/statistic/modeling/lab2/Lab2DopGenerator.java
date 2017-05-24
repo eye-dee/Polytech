@@ -38,13 +38,13 @@ public class Lab2DopGenerator {
         simpleDrawer.setY(realDistributionFunction);
         simpleDrawer.createDefaultX();
 
-        simpleDrawer.draw();
+        //simpleDrawer.draw();
 
         final SimpleDrawer simpleDrawer2 = new SimpleDrawer("Получается");
         simpleDrawer2.setY(distributionFunction);
         simpleDrawer2.createDefaultX();
 
-        simpleDrawer2.draw();
+        //simpleDrawer2.draw();
 
         final PirsonChecker pirsonChecker = new PirsonChecker();
         pirsonChecker.setDistributionFunc(distributionFunction);

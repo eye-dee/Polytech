@@ -4,6 +4,7 @@ import hospital.dao.DepartureDao;
 import hospital.types.Departure;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 
 /**
@@ -23,16 +24,32 @@ public class InsertDeparture extends JPanel {
         this.departureDao = departureDao;
 
         name = new JFormattedTextField();
+        name.setBorder(new TitledBorder("Название"));
 
         insert = new JButton("Добавить");
 
         insert.addActionListener(
-                e ->
+                e -> {
+                    try {
                         departureDao.insert(
                                 Departure.builder()
                                         .departureName(name.getText())
                                         .build()
-                        )
+                        );
+                    }  catch (final Exception exception) {
+                        JOptionPane.showMessageDialog(this,
+                                "Данные введены с ошибкой",
+                                "Inane error",
+                                JOptionPane.ERROR_MESSAGE);
+
+                        return;
+                    }
+
+                    JOptionPane.showMessageDialog(this,
+                            "Успешно добавлено",
+                            "Information",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
         );
 
         add(name);

@@ -1,6 +1,9 @@
 package hospital.visualization.list;
 
+import hospital.dao.DepartureDao;
 import hospital.dao.PeopleDao;
+import hospital.dao.WardDao;
+import hospital.types.Departure;
 import hospital.types.People;
 
 import javax.swing.*;
@@ -21,15 +24,20 @@ public class WriteOutPeople extends JPanel
     private final JList<String> list;
     private final DefaultListModel<String> listModel;
     private final List<People> peopleList = new ArrayList<>();
+    private final JComboBox departureList = new JComboBox();
 
     private static final String fireString = "Выписать";
     private final JButton fireButton;
 
     private final PeopleDao peopleDao;
+    private final DepartureDao departureDao;
+    private final WardDao wardDao;
 
-    public WriteOutPeople(final PeopleDao peopleDao) {
+    public WriteOutPeople(final PeopleDao peopleDao, final DepartureDao departureDao, final WardDao wardDao) {
         super(new BorderLayout());
         this.peopleDao = peopleDao;
+        this.departureDao = departureDao;
+        this.wardDao = wardDao;
 
         listModel = new DefaultListModel<>();
 
@@ -50,6 +58,7 @@ public class WriteOutPeople extends JPanel
         buttonPane.setLayout(new BoxLayout(buttonPane,
                 BoxLayout.LINE_AXIS));
         buttonPane.add(fireButton);
+        buttonPane.add(departureList);
         buttonPane.add(Box.createHorizontalStrut(5));
         buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
         buttonPane.add(Box.createHorizontalStrut(5));
@@ -57,6 +66,11 @@ public class WriteOutPeople extends JPanel
 
         add(listScrollPane, BorderLayout.CENTER);
         add(buttonPane, BorderLayout.PAGE_END);
+
+
+        departureList.addActionListener(
+                e -> updateListModel()
+        );
     }
 
     public void setjTabbedPane(final JTabbedPane jTabbedPane) {
@@ -64,19 +78,33 @@ public class WriteOutPeople extends JPanel
                 e -> {
                     final int index = jTabbedPane.getSelectedIndex();
                     if (index == 6) {
+                        updateDepartudeList();
                         updateListModel();
                     }
                 }
         );
     }
 
+    private void updateDepartudeList() {
+        departureList.removeAllItems();
+        departureDao.findAll()
+                .stream()
+                .map(Departure::getDepartureName)
+                .forEach(departureList::addItem);
+        departureList.setSelectedIndex(0);
+    }
+
     private void updateListModel() {
         listModel.clear();
         peopleList.clear();
 
+        final long departureId = departureDao.findByName((String) departureList.getSelectedItem());
+
         peopleDao.findAll().forEach(people -> {
-            peopleList.add(people);
-            listModel.addElement(people.toString());
+            if (wardDao.findById(people.getWardId()).getDepartureId() == departureId) {
+                peopleList.add(people);
+                listModel.addElement(people.toString());
+            }
         });
     }
 

@@ -39,4 +39,11 @@ public class People {
 
     @Transient
     private Diagnosis diagnosis;
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName + " " + fatherName +
+                (diagnosis == null ? "":
+                    " (" + diagnosis.getDiagnosisName() + ")");
+    }
 }

@@ -74,7 +74,14 @@ public class DepartureDaoImpl implements DepartureDao {
             final Query query = session.createQuery("from Departure where departureName = :name");
             query.setParameter("name",name);
 
-            return ((Departure)query.list().get(0)).getDepartureId();
+            final List list = query.list();
+
+            if (list.size() == 0) {
+                return -1L;
+            } else {
+                return ((Departure)list.get(0)).getDepartureId();
+            }
+
         }
     }
 

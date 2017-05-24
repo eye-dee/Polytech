@@ -124,7 +124,7 @@ public class ApplicationConfig {
 
     @Bean
     WriteOutPeople writeOutPeople() {
-        return new WriteOutPeople(peopleDao());
+        return new WriteOutPeople(peopleDao(), departureDao(), wardDao());
     }
 
     @Bean

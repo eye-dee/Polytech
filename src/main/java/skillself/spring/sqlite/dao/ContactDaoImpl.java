@@ -6,7 +6,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.object.SqlUpdate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -16,7 +15,6 @@ import skillself.spring.sqlite.object.ContactPhoneDetail;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

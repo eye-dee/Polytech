@@ -44,6 +44,7 @@ public class Lab3DopGenerator {
 
         drawer.draw();*/
 
+        System.out.println(temp.size());
         System.out.println(Arrays.toString(temp.toArray()));
 
         final KolmogorovCheck kolmogorovCheck = new KolmogorovCheck();

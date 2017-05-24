@@ -33,12 +33,11 @@ public class IntegerChecker implements IntervalChecker {
             intervals.add(0);
         }
 
-        //// TODO: 03.03.2017 "<3" warning
         for (int i = 0; i < sequence.size(); ++i){
             if (betweenAlphaAndBetta(sequence.get(i))) {
                 for (int j = 0; j < intervals.size(); ++j) {
                     int pos = j + i + 1;
-                    if (pos >= sequence.size()){
+                    while (pos >= sequence.size()){
                         pos -= sequence.size();
                     }
                     if (betweenAlphaAndBetta(sequence.get(pos))) {
