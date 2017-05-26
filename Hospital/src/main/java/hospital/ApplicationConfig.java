@@ -4,6 +4,7 @@ import hospital.dao.*;
 import hospital.impl.*;
 import hospital.init.Import;
 import hospital.types.*;
+import hospital.visualization.graph.MainGraph;
 import hospital.visualization.insert.InsertDeparture;
 import hospital.visualization.insert.InsertDiagnosis;
 import hospital.visualization.insert.InsertWard;
@@ -137,6 +138,7 @@ public class ApplicationConfig {
         tabbedPane.addTab("Добавить палату",null, insertWard(), null);
         tabbedPane.addTab("Добавить диагноз", null, insertDiagnosis(),null);
         tabbedPane.addTab("Выписывание пациентов",null,writeOutPeople(),null);
+        tabbedPane.addTab("Графики", null, mainGraph(), null);
 
         tabbedPane.setSelectedIndex(0);
         final String toolTip = "<html>Blue Wavy Line border art crew:<br>&nbsp;&nbsp;&nbsp;Bill Pauley<br>&nbsp;&nbsp;&nbsp;Cris St. Aubyn<br>&nbsp;&nbsp;&nbsp;Ben Wronsky<br>&nbsp;&nbsp;&nbsp;Nathan Walrath<br>&nbsp;&nbsp;&nbsp;Tommy Adams, special consultant</html>";
@@ -148,6 +150,11 @@ public class ApplicationConfig {
         }
 
         return tabbedPane;
+    }
+
+    @Bean
+    MainGraph mainGraph() {
+        return new MainGraph(wardDao(), departureDao());
     }
 
     @Bean
