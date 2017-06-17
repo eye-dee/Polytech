@@ -2,16 +2,12 @@ package yandex.api.check;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import statistic.modeling.lab1.SimpleDrawerImprove;
-import yandex.HttpUtil;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -71,7 +67,18 @@ public class TimeChecker {
 
     public static void main(final String[] args) throws IOException {
         final LocalDateTime now = now();
-        final AtomicBoolean cont = new AtomicBoolean(true);
+        System.out.println(String.format(QUERY1, now.toString(), now.minusDays(0).toString()));
+       /* for (int i = 0; i < 5000; ++i) {
+            final int response = HttpUtil.easyExec(
+                    String.format(QUERY1, now.toString(), now.minusDays(i).toString()),
+                    HttpUtil.GET
+            );
+
+            System.out.println(response);
+        }
+
+*/
+        /*final AtomicBoolean cont = new AtomicBoolean(true);
 
         final Thread thread = new Thread(new Run(cont));
 
@@ -107,6 +114,6 @@ public class TimeChecker {
 
         simpleDrawerImprove.addChartPanelWithDefaultX(values);
 
-        simpleDrawerImprove.draw();
+        simpleDrawerImprove.draw();*/
     }
 }

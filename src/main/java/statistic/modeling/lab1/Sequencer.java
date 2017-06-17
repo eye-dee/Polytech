@@ -37,6 +37,10 @@ public class Sequencer {
         }
     }
 
+    public List<Double> getLastSequence() {
+        return sequence.get(sequence.size() - 1);
+    }
+
     public class Pair{
         //математическое ожидание
         private Double m;

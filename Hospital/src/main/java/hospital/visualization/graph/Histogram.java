@@ -74,7 +74,7 @@ public class Histogram {
                     g2d.draw(bar);
 
                     g2d.setColor(Color.BLACK);
-                    g2d.drawString(mapHistory.get(key).getWardName() + 0.2*barWidth,xPos,0.9f*height);
+                    g2d.drawString(mapHistory.get(key).getWardName(),xPos + 0.2f*barWidth,0.9f*height);
 
                     xPos += barWidth;
                 }

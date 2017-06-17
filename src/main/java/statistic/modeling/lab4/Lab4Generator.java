@@ -13,21 +13,21 @@ public class Lab4Generator {
     private final static double lam1 = 40e-6;
     private final static double lam2 = 10e-6;
     private final static double lam3 = 80e-6;
-    private static final double P = 0.99;
+    private static final double P = 0.999;
     private static final double T = 8760.0;
     private static final List<Boolean> elements = Arrays.asList(
-            true, true, true, true, true, true, true, true
+            true, true, true, true, true, true, true, true, true, true, true
     );
-    public static int N = 100000;
+    public static int N = 10000;
     private static Random random = new Random();
     private static List<Double> times = Arrays.asList(
-            0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+            0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
     );
 
     public static boolean F() {
         return ((elements.get(0) && elements.get(1)) || elements.get(2)) &&
                 (elements.get(3) && elements.get(4)) &&
-                (elements.get(5) || elements.get(6) || elements.get(7));
+                ( (elements.get(5) && elements.get(6)) || (elements.get(7) && elements.get(8)) || (elements.get(9) && elements.get(10)));
     }
 
     public static double fail(final double lam) {
@@ -47,10 +47,10 @@ public class Lab4Generator {
                         sum += timeP(i, j, k);
                     }
 
-                    if (sum/PP > P) {
-                        System.out.println("i = " + i + " j = " + j + " k = " + k + " sum = " + sum/PP + "!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    if (sum / PP > P) {
+                        System.out.println("i = " + i + " j = " + j + " k = " + k + " sum = " + sum / PP + "!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                     } else {
-                        System.out.println("i = " + i + " j = " + j + " k = " + k + " sum = " + sum/PP);
+                        System.out.println("i = " + i + " j = " + j + " k = " + k + " sum = " + sum / PP);
                     }
                 }
             }
@@ -77,7 +77,7 @@ public class Lab4Generator {
                 evalTimes(3 + minIndex, times, times.get(minIndex));
             }
             for (int k = 0; k < parts3; ++k) {
-                final int minIndex = getMinIndex(times.subList(5, 8));
+                final int minIndex = getMinIndex(times.subList(5, 11));
                 evalTimes(5 + minIndex, times, times.get(minIndex));
             }
 
