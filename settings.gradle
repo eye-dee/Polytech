@@ -1,3 +1,4 @@
 rootProject.name = 'Polytech'
 include 'Hospital'
+include 'vk-notifier'
 

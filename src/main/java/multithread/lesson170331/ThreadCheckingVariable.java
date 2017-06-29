@@ -1,6 +1,6 @@
 package multithread.lesson170331;
 
-import multithread.lesson170310.Utils;
+import multithread.Utils;
 
 /**
  * Polytech
